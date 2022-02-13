@@ -33,7 +33,7 @@ jobs:
       - name: Setu up JDK 1.8
         uses: actions/checkout@v2
         with:
-          java-veersion: 1.8
+          java-version: 1.8
 
       # Runs a set of commands using the runners shell
       - name: Grant exectue permission for gradlew
