@@ -44,15 +44,28 @@ jobs:
         run: ./gradlew build
         shell: bash
         
+      - name: Before deploy
+        run: 
+          mkdir -p before-deploy
+          cp scripts/*.sh before-deploy/
+          cp appsepc.yml before-deploy/
+          cp build/libs/*.jar before-deploy/
+          cd before-deploy && zip -r before-deploy *
+          cd ../ && mkdir -p deploy
+          mv before-deploy/before-deploy.zip deploy/$GITHUB_SHA.zip
+        shell: bash
+        
       - name: Make zip file 
         run: zip -r ./$GITHUB_SHA.zip . 
         shell: bash 
+        
       - name: Configure AWS credentials 
         uses: aws-actions/configure-aws-credentials@v1
         with: 
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }} 
+          
       - name: Upload to S3 
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
       
