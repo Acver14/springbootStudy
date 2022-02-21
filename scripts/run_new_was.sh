@@ -19,6 +19,9 @@ if [ ! -z ${TARGET_PID} ];
   sudo kill ${TARGET_PID}
 fi
 
-nohup java -jar -Dserver.port=${TARGET_PORT} /home/ec2-user/playground-logging/build/libs/* > /home/ec2-user/nohup.out 2>&1 &
+nohup java -jar \
+                        -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
+                        -Dspring.profiles.active=real \
+  -Dserver.port=${TARGET_PORT} /home/ec2-user/app/deploy/zip/build/libs/* > /home/ec2-user/nohup.out 2>&1 &
 echo "> Now new WAS runs at ${TARGET_PORT}."
 exit 0
