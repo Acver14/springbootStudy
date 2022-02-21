@@ -43,17 +43,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
-        
-      - name: Before deploy
-        run: 
-          cp scripts/*.sh before-deploy/
-          cp appsepc.yml before-deploy/
-          cp build/libs/*.jar before-deploy/
-          cd before-deploy && zip -r before-deploy *
-          cd ../
-          mv before-deploy/before-deploy.zip deploy/$GITHUB_SHA.zip
-        shell: bash
-        
       - name: Make zip file 
         run: zip -r ./$GITHUB_SHA.zip . 
         shell: bash 
