@@ -4,11 +4,11 @@ ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
 source ${ABSDIR}/profile.sh
 
-REPOSITORY=/home/ec2-user/app/step3
+REPOSITORY=/home/ec2-user/app/step3/zip/build/libs
 PROJECT_NAME=localStudy
 
 echo "> Build 파일 복사"
-echo "> cp $REPOSITORY/zip/*.jar $REPOSITORY/"
+echo "> cp $REPOSITORY/*.jar $REPOSITORY/"
 
 cp $REPOSITORY/*.jar $REPOSITORY/
 
