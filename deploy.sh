@@ -1,6 +1,6 @@
     #!/bin/bash
 
-    REPOSITORY=/home/ec2-user/app/step2
+    REPOSITORY=/home/ec2-user/app/step2/build/libs
     PROJECT_NAME=springboot-study
 
     echo "> Build 파일 복사"
@@ -9,7 +9,7 @@
 
     echo "> 현재 구동중인 애플리케이션 pid 확인"
 
-    CURRENT_PID=$(pgrep -fl localStudy | grep jar | awk '{print $1}')
+    CURRENT_PID=$(pgrep -fl springboot-study | grep jar | awk '{print $1}')
 
     echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
 
